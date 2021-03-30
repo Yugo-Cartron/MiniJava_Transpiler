@@ -81,6 +81,7 @@ let print_binop out = function
      fprintf out "OpLt"
   | OpAnd ->
      fprintf out "OpAnd"
+  | OpEqu -> fprintf out "OpEqu"
 
 (** [print_expression prefix out e] prints the expression [e] on the output channel [out].
     [prefix] is the string already printed just before [e]. *)

@@ -49,7 +49,9 @@ let print_token show_loc out = function
   | TIMES ->
      fprintf out "TIMES"
   | NOT ->
-     fprintf out "NOT"
+     fprintf out "NOT"|
+  | EQUALITY ->
+     fprintf out "EQUALITY"|
   | LT ->
      fprintf out "LT"
   | AND ->
