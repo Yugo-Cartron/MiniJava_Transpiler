@@ -143,6 +143,7 @@ and typecheck_expression (cenv : class_env) (venv : variable_env) (vinit : S.t)
         match op with
         | OpAdd
         | OpSub
+        | OpEqu -> TypeInt, TypBool
         | OpMul -> TypInt, TypInt
         | OpLt  -> TypInt, TypBool
         | OpAnd -> TypBool, TypBool
