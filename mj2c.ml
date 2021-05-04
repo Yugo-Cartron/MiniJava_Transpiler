@@ -488,6 +488,14 @@ let instr2c
          (if x_class <> e_class then sprintf "(struct %s*) " x_class else "")
          (expr2c method_name class_info) e
 
+    | IInc (x, e) ->
+       let x_class = ClassInfo.class_of method_name x class_info in
+       let e_class = get_class method_name class_info e in
+       fprintf out "%a += %s%a;"
+         (var2c method_name class_info) x
+         (if x_class <> e_class then sprintf "(struct %s*) " x_class else "")
+         (expr2c method_name class_info) e
+
     | IArraySet (id, ei, ev) ->
        fprintf out "(%a)->array[%a] = %a;"
          (var2c method_name class_info) id
@@ -500,6 +508,14 @@ let instr2c
          instr2c i1
          nl
          instr2c i2
+
+    | IFor (i1,c,i2,i3) ->
+       fprintf out "for (%a %a; %a) %a"
+        instr2c i1
+        (expr2c method_name class_info) c
+        instr2c i2
+        instr2c i3
+
 
     | IWhile (c, i) ->
        fprintf out "while (%a) %a"

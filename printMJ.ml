@@ -124,6 +124,10 @@ let rec instr out = function
      fprintf out "%s = %a;"
        x
        expr e
+  | IInc (x, e) ->
+     fprintf out "%s += %a;"
+       x
+       expr e
   | IArraySet (id, ei, ev) ->
      fprintf out "%s[%a] = %a;"
        id
@@ -135,6 +139,12 @@ let rec instr out = function
         instr i1
         nl
         instr i2
+  | IFor (i1, c, i2, i3) ->
+      fprintf out "for (%a %a; %a) %a"
+         instr i1
+         expr c
+         instr i2
+         instr i3
   | IWhile (c, i) ->
       fprintf out "while (%a) %a"
         expr c

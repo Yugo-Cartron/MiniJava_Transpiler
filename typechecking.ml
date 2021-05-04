@@ -191,6 +191,13 @@ let rec typecheck_instruction (cenv : class_env) (venv : variable_env) (vinit : 
      typecheck_expression_expecting cenv venv vinit instanceof (vlookup v venv) e;
      vinit
 
+  | IInc (v, e) ->
+     let vinit =
+       S.add (Location.content v) vinit
+     in
+     typecheck_expression_expecting cenv venv vinit instanceof (vlookup v venv) e;
+     vinit
+
   | IArraySet (earray, eindex, evalue) ->
     typecheck_expression_expecting cenv venv vinit instanceof TypIntArray
       (Location.make (Location.startpos earray) (Location.endpos earray) (EGetVar earray));
@@ -214,6 +221,12 @@ let rec typecheck_instruction (cenv : class_env) (venv : variable_env) (vinit : 
       typecheck_instruction cenv venv vinit instanceof ielse
     in
     S.inter vinit1 vinit2
+
+  | IFor (i, cond, iinc, ibody) ->
+    typecheck_instruction cenv venv vinit instanceof i;
+    typecheck_expression_expecting cenv venv vinit instanceof TypBool cond;
+    typecheck_instruction cenv venv vinit instanceof iinc;
+    typecheck_instruction cenv venv vinit instanceof ibody
 
   | IWhile (cond, ibody) ->
     typecheck_expression_expecting cenv venv vinit instanceof TypBool cond;

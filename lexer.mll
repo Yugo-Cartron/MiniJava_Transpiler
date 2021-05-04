@@ -26,6 +26,7 @@ rule get_token = parse
   | space+    { get_token lexbuf }
   | "/*"      { comment lexbuf }
   | '+'       { PLUS }
+  | "+="      { INC }
   | '-'       { MINUS }
   | '*'       { TIMES }
   | "&&"      { AND }
@@ -61,6 +62,7 @@ rule get_token = parse
   | "length"  { LENGTH }
   | "System.out.println" { SYSO }
   | "if"    { IF }
+  | "for"   { FOR }
   | "else"  { ELSE }
   | "while" { WHILE }
   | integer as i
