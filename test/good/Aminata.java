@@ -10,5 +10,5 @@ class A {
         i = 0;
         i += 10;
         return i;
-    }
+
 }

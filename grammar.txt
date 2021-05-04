@@ -15,13 +15,14 @@ Type ::= 'int' '[' ']'
 
 Statement ::= '{' Statement* '}'
         | 'if' '(' Expression ')' Statement 'else' Statement
+        | 'if' '(' Expression ')' Statement
         | 'while' '(' Expression ')' Statement
         | 'System.out.println' '(' Expression ')' ';'
         | Identifier ( '=' | '+=' ) Expression ';'
         | Identifier '[' Expression ']' '=' Expression ';'
         | 'for' '(' Statement Expression ';' Statement ')' Statement
 
-Expression ::= Expression ( '&&' | '<' | '+' | '-' | '*' | '==' | '||' ) Expression
+Expression ::= Expression ( '&&' | '<' | '>' | '+' | '-' | '*' | '==' | '||' ) Expression
         | Expression '[' Expression ']'
         | Expression '.' 'length'
         | Expression '.' Identifier '(' ( Expression ( ',' Expression )* )? ')'

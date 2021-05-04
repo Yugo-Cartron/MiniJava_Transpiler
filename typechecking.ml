@@ -146,6 +146,7 @@ and typecheck_expression (cenv : class_env) (venv : variable_env) (vinit : S.t)
         | OpMul -> TypInt, TypInt
         | OpEqu -> TypInt, TypBool
         | OpLt  -> TypInt, TypBool
+        | OpMt  -> TypInt, TypBool
         | OpAnd -> TypBool, TypBool
         | OpOr  -> TypBool, TypBool
       in
@@ -227,6 +228,10 @@ let rec typecheck_instruction (cenv : class_env) (venv : variable_env) (vinit : 
     typecheck_expression_expecting cenv venv vinit instanceof TypBool cond;
     typecheck_instruction cenv venv vinit instanceof iinc;
     typecheck_instruction cenv venv vinit instanceof ibody
+
+  | IIfWElse (cond, ithen) ->
+    typecheck_expression_expecting cenv venv vinit instanceof TypBool cond;
+    typecheck_instruction cenv venv vinit instanceof ithen
 
   | IWhile (cond, ibody) ->
     typecheck_expression_expecting cenv venv vinit instanceof TypBool cond;
