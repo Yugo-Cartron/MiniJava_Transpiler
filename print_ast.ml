@@ -79,6 +79,8 @@ let print_binop out = function
      fprintf out "OpMul"
   | OpLt  ->
      fprintf out "OpLt"
+  | OpMt  ->
+     fprintf out "OpMt"
   | OpAnd ->
      fprintf out "OpAnd"
   | OpOr -> 
@@ -194,6 +196,14 @@ let rec print_instruction prefix out i =
        prefix'
        branch_end
        (print_instruction prefix') i2
+  | IIfWElse (e, i1) ->
+      fprintf out "IIfWElse\n%s%s%a\n%s%s%a"
+        prefix'
+        branch
+        (print_expression (prefix' ^ pipe)) e
+        prefix'
+        branch
+        (print_instruction (prefix' ^ pipe)) i1
   | IWhile (e, i) ->
      fprintf out "IWhile\n%s%s%a\n%s%s%a"
        prefix'

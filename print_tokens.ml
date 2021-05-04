@@ -54,6 +54,8 @@ let print_token show_loc out = function
      fprintf out "EQUALITY"
   | LT ->
      fprintf out "LT"
+  | MT ->
+     fprintf out "MT"
   | AND ->
      fprintf out "AND"
    | OR -> 

@@ -1,19 +1,19 @@
 class Aminata {
     public static void main(String[] args) { 
-        System.out.println(new A().aminata(8));
+        System.out.println(new A().aminata(12));
     }
 }
 
 class A {
     public int aminata(int n) {
-
         int res;
-        if( n > 10 || n < 3) {
-            res = 1;
+        res = n;
+        if(n>10){
+            res = 0;
         }
         else {
-            res = 0;
-        } 
+            res = 1;
+        }
         return res;
     }
 }
