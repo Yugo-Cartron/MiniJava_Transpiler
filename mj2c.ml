@@ -502,6 +502,11 @@ let instr2c
          nl
          instr2c i2
 
+    |IIfWElse (c, i1) ->
+       fprintf out "if (%a) %a"
+         (expr2c method_name class_info) c
+         instr2c i1
+
     | IWhile (c, i) ->
        fprintf out "while (%a) %a"
          (expr2c method_name class_info) c
