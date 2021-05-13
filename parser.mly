@@ -10,11 +10,11 @@
 %token CLASS PUBLIC STATIC VOID MAIN STRING EXTENDS RETURN
 %token PLUS MINUS TIMES NOT LT MT AND OR EQUALITY
 %token COMMA SEMICOLON
-%token ASSIGN
+%token ASSIGN INC
 %token LPAREN RPAREN LBRACKET RBRACKET LBRACE RBRACE
 %token THIS NEW DOT LENGTH
 %token SYSO
-%token IF ELSE WHILE
+%token IF ELSE WHILE FOR
 %token EOF
 
 %left AND
@@ -162,6 +162,12 @@ instruction:
 | id = IDENT ASSIGN e = expression SEMICOLON
    { ISetVar (id, e) }
 
+| id = IDENT ASSIGN e = expression
+   { ISetVar (id, e) }
+
+| id = IDENT INC e = expression SEMICOLON
+   { IInc (id,e) }
+
 | a = IDENT LBRACKET i = expression RBRACKET ASSIGN e = expression SEMICOLON
    { IArraySet (a, i, e) }
 
@@ -176,6 +182,9 @@ instruction:
 
 | WHILE LPAREN c = expression RPAREN i = instruction
    { IWhile (c, i) }
+
+| FOR LPAREN i1 = instruction e = expression SEMICOLON i2 = instruction RPAREN i3 = instruction
+   { IFor (i1,e,i2,i3)}
 
 block:
 | LBRACE is = list(instruction) RBRACE

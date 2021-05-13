@@ -17,10 +17,12 @@ and translate_raw_expression = function
 and translate_instruction = function
 | LMJ.IBlock is -> MJ.IBlock (List.map translate_instruction is)
 | LMJ.IIf (c, i1, i2) -> MJ.IIf (translate_expression c, translate_instruction i1, translate_instruction i2)
+| LMJ.IFor (i1, c, i2, i3) -> MJ.IFor( translate_instruction i1, translate_expression c, translate_instruction i2, translate_instruction i3)
 | LMJ.IIfWElse (c, i1) -> MJ.IIfWElse (translate_expression c, translate_instruction i1)
 | LMJ.IWhile (c, i) -> MJ.IWhile (translate_expression c, translate_instruction i)
 | LMJ.ISyso e -> MJ.ISyso (translate_expression e)
 | LMJ.ISetVar (id, e) -> MJ.ISetVar (Location.content id, translate_expression e)
+| LMJ.IInc (id, e) -> MJ.IInc (Location.content id, translate_expression e)
 | LMJ.IArraySet (a, e1, e2) -> MJ.IArraySet (Location.content a, translate_expression e1, translate_expression e2)
 
 let translate_typ = function

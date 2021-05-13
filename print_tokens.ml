@@ -66,6 +66,8 @@ let print_token show_loc out = function
      fprintf out "SEMICOLON"
   | ASSIGN ->
      fprintf out "ASSIGN"
+  | INC ->
+     fprintf out "INC"
   | LPAREN ->
      fprintf out "LPAREN"
   | RPAREN ->
@@ -90,6 +92,8 @@ let print_token show_loc out = function
      fprintf out "SYSO"
   | IF ->
      fprintf out "IF"
+  | FOR ->
+     fprintf out "FOR"
   | ELSE ->
      fprintf out "ELSE"
   | WHILE ->
