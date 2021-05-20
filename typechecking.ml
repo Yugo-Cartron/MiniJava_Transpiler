@@ -223,11 +223,18 @@ let rec typecheck_instruction (cenv : class_env) (venv : variable_env) (vinit : 
     in
     S.inter vinit1 vinit2
 
-  | IFor (i, cond, iinc, ibody) ->
-    typecheck_instruction cenv venv vinit instanceof i;
-    typecheck_expression_expecting cenv venv vinit instanceof TypBool cond;
-    typecheck_instruction cenv venv vinit instanceof iinc;
-    typecheck_instruction cenv venv vinit instanceof ibody
+  | IFor (i1, c, i2, ibody) ->
+    typecheck_expression_expecting cenv venv vinit instanceof TypBool c;
+    let vinit1 = 
+       typecheck_instruction cenv venv vinit instanceof i1;
+    in 
+    let vinit2 = 
+    typecheck_instruction cenv venv vinit instanceof i2;
+    in 
+    let vinit3 = 
+    typecheck_instruction cenv venv vinit instanceof  ibody
+    in  
+      let inter1 = S.inter vinit1 vinit2 in S.inter inter1 vinit3
 
   | IIfWElse (cond, ithen) ->
     typecheck_expression_expecting cenv venv vinit instanceof TypBool cond;

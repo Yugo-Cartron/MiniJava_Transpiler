@@ -20,7 +20,6 @@ Statement ::= '{' Statement* '}'
         | 'System.out.println' '(' Expression ')' ';'
         | Identifier ( '=' | '+=' ) Expression ';'
         | Identifier '[' Expression ']' '=' Expression ';'
-        | 'for' '(' Statement Expression ';' Statement ')' Statement
 
 Expression ::= Expression ( '&&' | '<' | '>' | '+' | '-' | '*' | '==' | '||' ) Expression
         | Expression '[' Expression ']'

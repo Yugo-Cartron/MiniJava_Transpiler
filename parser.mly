@@ -183,8 +183,9 @@ instruction:
 | WHILE LPAREN c = expression RPAREN i = instruction
    { IWhile (c, i) }
 
-| FOR LPAREN i1 = instruction e = expression SEMICOLON i2 = instruction RPAREN i3 = instruction
-   { IFor (i1,e,i2,i3)}
+| FOR LPAREN id1=IDENT ASSIGN e1 = expression SEMICOLON c 
+      = expression SEMICOLON id2 = IDENT ASSIGN e2 = expression RPAREN i3 = instruction
+   { IFor (ISetVar (id1, e1), c, ISetVar (id2, e2), i3) }
 
 block:
 | LBRACE is = list(instruction) RBRACE

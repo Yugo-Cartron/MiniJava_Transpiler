@@ -510,12 +510,11 @@ let instr2c
          nl
          instr2c i2
 
-<<<<<<< HEAD
     |IIfWElse (c, i1) ->
        fprintf out "if (%a) %a"
          (expr2c method_name class_info) c
          instr2c i1
-=======
+         
     | IFor (i1,c,i2,i3) ->
        fprintf out "for (%a %a; %a) %a"
         instr2c i1
@@ -523,7 +522,6 @@ let instr2c
         instr2c i2
         instr2c i3
 
->>>>>>> 9543adfea8461992c5bbef7c4c907acb8d73f6f1
 
     | IWhile (c, i) ->
        fprintf out "while (%a) %a"
